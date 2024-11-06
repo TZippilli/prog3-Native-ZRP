@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { auth } from '../firebase/config';
 
 export default class Login extends Component {
@@ -30,122 +30,120 @@ export default class Login extends Component {
         }
       });
   };
-  
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Ingresar</Text>
+      <View style={styles.background}>
+        <View style={styles.container}>
+          <Image
+            style={styles.image}
+            source={require('../../assets/pandagramLogo.png')}
+            resizeMode="contain"
+          />
+          <Text style={styles.title}>Ingresar</Text>
 
-        <TextInput 
-          style={styles.input} 
-          keyboardType="email-address"
-          placeholder="Email"
-          placeholderTextColor="#aaa"
-          onChangeText={text => this.setState({ email: text })}
-          value={this.state.email}
-        />
+          <TextInput 
+            style={styles.input} 
+            keyboardType="email-address"
+            placeholder="Email"
+            placeholderTextColor="#aaa"
+            onChangeText={text => this.setState({ email: text })}
+            value={this.state.email}
+          />
 
-        <TextInput 
-          style={styles.input} 
-          placeholder="Password"
-          placeholderTextColor="#aaa"
-          secureTextEntry={true}
-          onChangeText={text => this.setState({ password: text })}
-          value={this.state.password}
-        />
+          <TextInput 
+            style={styles.input} 
+            placeholder="Password"
+            placeholderTextColor="#aaa"
+            secureTextEntry={true}
+            onChangeText={text => this.setState({ password: text })}
+            value={this.state.password}
+          />
 
-        <TouchableOpacity style={styles.buttonGreen} onPress={this.onSubmit}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonPrimary} onPress={this.onSubmit}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
 
-        {this.state.errorMsg ? <Text style={styles.error}>{this.state.errorMsg}</Text> : null}
+          {this.state.errorMsg ? <Text style={styles.error}>{this.state.errorMsg}</Text> : null}
 
-        <TouchableOpacity
-          style={styles.buttonBlue}
-          onPress={() => this.props.navigation.navigate('Register')}
-        >
-          <Text style={styles.buttonText}>No tengo cuenta</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.buttonSecondary}
+            onPress={() => this.props.navigation.navigate('Register')}
+          >
+            <Text style={styles.buttonText}>No tengo cuenta</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#f5f5f5',
-    marginTop: 20,
+    backgroundColor: '#1a1f71', // Fondo azul oscuro
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
+  container: {
+    width: '90%',
+    backgroundColor: '#f0f0f5', // Fondo claro para el contenedor
+    padding: 20,
+    borderRadius: 12,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 8,
+  },
+  image: {
+    height: 120,
+    width: 120,
     marginBottom: 20,
   },
-  description: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 10,
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1a1f71', // Color azul oscuro del logo
+    marginBottom: 20,
   },
   input: {
-    height: 20,
-    paddingVertical: 15,
+    width: '100%',
+    height: 45,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderStyle: 'solid',
-    borderRadius: 6,
-    marginVertical: 10,
+    borderColor: '#888',
+    borderRadius: 8,
     backgroundColor: '#fff',
     fontSize: 16,
     color: '#333',
-    width: '100%',
+    marginBottom: 15,
   },
-  buttonGreen: {
-    backgroundColor: '#28a745',
+  buttonPrimary: {
+    backgroundColor: '#4e54c8', // Color azul-morado degradado
+    paddingVertical: 12,
     paddingHorizontal: 10,
-    paddingVertical: 6,
     alignItems: 'center',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#28a745',
+    borderRadius: 8,
     width: '100%',
-    marginTop: 20,
+    marginBottom: 10,
   },
-  buttonBlue: {
-    backgroundColor: '#67b7f7',
-    padding: 15,
-    marginTop: 10,
-    borderRadius: 10,
-    width: '100%',
+  buttonSecondary: {
+    backgroundColor: '#6a1b9a', // Color morado oscuro
+    paddingVertical: 12,
+    paddingHorizontal: 10,
     alignItems: 'center',
-  },
-  buttonOrange: {
-    backgroundColor: '#f7a667',
-    padding: 15,
-    marginTop: 20,
-    borderRadius: 10,
+    borderRadius: 8,
     width: '100%',
-    alignItems: 'center',
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
   },
-  preview: {
-    marginTop: 30,
-    padding: 10,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 6,
-    backgroundColor: '#f9f9f9',
-    width: '100%',
-    alignItems: 'center',
+  error: {
+    color: '#ff1744',
+    marginVertical: 10,
   },
 });
