@@ -83,11 +83,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1a1f71', // Fondo azul oscuro
+    backgroundColor: '#1a1f71', 
   },
   container: {
     width: '90%',
-    backgroundColor: '#f0f0f5', // Fondo claro para el contenedor
+    backgroundColor: '#f0f0f5', 
     padding: 20,
     borderRadius: 12,
     alignItems: 'center',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#1a1f71', // Color azul oscuro del logo
+    color: '#1a1f71', 
     marginBottom: 20,
   },
   input: {
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   buttonPrimary: {
-    backgroundColor: '#4e54c8', // Color azul-morado degradado
+    backgroundColor: '#4e54c8', 
     paddingVertical: 12,
     paddingHorizontal: 10,
     alignItems: 'center',
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonSecondary: {
-    backgroundColor: '#6a1b9a', // Color morado oscuro
+    backgroundColor: '#6a1b9a', 
     paddingVertical: 12,
     paddingHorizontal: 10,
     alignItems: 'center',

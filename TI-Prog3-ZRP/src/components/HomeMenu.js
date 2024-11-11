@@ -1,10 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Image, StyleSheet } from 'react-native'; // Importa estos componentes
+import { View, Image, StyleSheet } from 'react-native';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
 import Users from '../screens/Users';
 import { Ionicons } from '@expo/vector-icons';
+import NewPost from '../screens/NewPost';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +23,15 @@ export default function HomeMenu() {
           options={{
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen 
+          name="Nuevo post" 
+          component={NewPost} 
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="create" size={size} color={color} />  
             ),
           }}
         />
