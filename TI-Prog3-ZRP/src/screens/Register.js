@@ -20,7 +20,6 @@ export default class Register extends Component {
       .then(response => {
         if (response) {
           db.collection('users').add({
-            bio: bio,
             email: email,
             user: user,
             createdAt: Date.now()
@@ -69,16 +68,6 @@ export default class Register extends Component {
             secureTextEntry={true}
             onChangeText={text => this.setState({ password: text })}
             value={this.state.password}
-          />
-          <TextInput
-            style={[styles.input, styles.bioInput]}
-            keyboardType="default"
-            placeholder="Bio"
-            placeholderTextColor="#aaa"
-            onChangeText={text => this.setState({ bio: text })}
-            value={this.state.bio}
-            multiline={true}
-            numberOfLines={4}
           />
           <TouchableOpacity style={styles.buttonPrimary} onPress={() => this.onSubmit(this.state.email, this.state.password, this.state.bio, this.state.user)}>
             <Text style={styles.buttonText}>Registrarse</Text>
