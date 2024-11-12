@@ -3,113 +3,100 @@ import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-nativ
 import { auth, db } from '../firebase/config';
 
 export default class NewPost extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            descripcion: ''
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      descripcion: '',
+    };
+  }
 
-    handleSubmit(descripcion) {
-        console.log(descripcion)
-        db.collection('posts').add({
-            descripcion: descripcion,
-            email: auth.currentUser.email,
-            createdAt: Date.now()
-          })
-          .then(() => {
-            this.setState({ registered: true, errorMsg: '' });
-            console.log("creado")
-          })
-          .catch(e => console.log(e.message));
-    }
+  handleSubmit = () => {
+    const { descripcion } = this.state;
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.formContainer}>
+    db.collection('posts').add({
+      descripcion: descripcion,
+      email: auth.currentUser.email,
+      likes: [],
+      createdAt: Date.now()
+    })
+    .then(() => {
+      this.setState({ descripcion: '' });
+    })
+    .catch(e => console.log(e.message));
+  }
 
-                    <Text style={styles.title}> Post! </Text>
-
-                    <TextInput style={styles.input}
-                        keyboardType='default'
-                        placeholder='Mensaje del post...'
-                        onChangeText={text => this.setState({ descripcion: text })}
-                        value={this.state.descripcion}
-                        multiline={true}
-                        numberofLines={4} />
-
-                    <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit( this.state.descripcion)}>
-                        <Text style={styles.buttonText}> Crear post </Text>
-                    </TouchableOpacity>
-                </View>
-
-                {this.state.errorMsg && <Text>{this.state.errorMsg}</Text>}
-
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Post!</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType='default'
+            placeholder='Mensaje del post...'
+            onChangeText={text => this.setState({ descripcion: text })}
+            value={this.state.descripcion}
+            multiline={true}
+            numberOfLines={4}
+          />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.handleSubmit}
+            disabled={!this.state.descripcion.trim()}
+          >
+            <Text style={styles.buttonText}>Crear post</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#1a1f71',
-    },
     container: {
-        width: '90%',
-        backgroundColor: '#f0f0f5',
-        padding: 20,
-        borderRadius: 12,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 8,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20,
     },
-    image: {
-        height: 120,
-        width: 120,
-        marginBottom: 20,
+    formContainer: {
+      width: '100%',
+      padding: 20,
+      borderRadius: 12,
+      backgroundColor: '#fff',
+      shadowColor: '#000',
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
     },
     title: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        color: '#1a1f71',
-        marginBottom: 20,
+      fontSize: 28,
+      fontWeight: 'bold',
+      color: '#333',
+      textAlign: 'center',
+      marginBottom: 20,
     },
     input: {
-        width: '100%',
-        height: 45,
-        paddingHorizontal: 10,
-        borderWidth: 1,
-        borderColor: '#888',
-        borderRadius: 8,
-        backgroundColor: '#fff',
-        fontSize: 16,
-        color: '#333',
-        marginBottom: 15,
+      width: '100%',
+      height: 100,
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderWidth: 1,
+      borderColor: '#ccc',
+      borderRadius: 8,
+      backgroundColor: '#f5f5f5',
+      fontSize: 16,
+      marginBottom: 20,
     },
     button: {
-        backgroundColor: '#4e54c8',
-        paddingVertical: 12,
-        paddingHorizontal: 10,
-        alignItems: 'center',
-        borderRadius: 8,
-        width: '100%',
-        marginBottom: 10,
+      width: '100%',
+      paddingVertical: 12,
+      backgroundColor: '#3b82f6',
+      alignItems: 'center',
+      borderRadius: 8,
     },
     buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 16,
+      fontWeight: 'bold',
+      fontSize: 16,
+      color: '#fff',
     },
-    errorMsg: {
-        color: '#ff1744',
-        marginTop: 10,
-    },
-});
+  });
