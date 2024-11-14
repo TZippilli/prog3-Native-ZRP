@@ -29,7 +29,7 @@ export default class Profile extends Component {
       );
   }
 
-
+//borro el post y actualizo el estado con la nueva lista, sin el post eliminado
   handleDeletePost = (postId) => {
     db.collection('posts').doc(postId).delete()
       .then(() => {
