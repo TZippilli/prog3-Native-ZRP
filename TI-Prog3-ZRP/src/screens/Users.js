@@ -29,7 +29,7 @@ export default class Users extends Component {
             }
         );
     }
-
+//elegimos filtrar por email
     userFilter = (text) => {
         this.setState({
             filterValue: text,

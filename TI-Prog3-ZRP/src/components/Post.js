@@ -23,7 +23,7 @@ export default class Post extends Component {
 
   handleLike = () => {
     db.collection('posts').doc(this.props.item.id).update({
-      likes: firebase.firestore.FieldValue.arrayUnion(this.props.item.data.email)
+      likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
     })
     .then(() => {
       this.setState({
