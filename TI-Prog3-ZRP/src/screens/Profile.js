@@ -24,6 +24,7 @@ export default class Profile extends Component {
               data: doc.data()
             });
           });
+          posts.sort((a,b) => b.data.createdAt - a.data.createdAt);
           this.setState({ userPosts: posts });
         }
       );
