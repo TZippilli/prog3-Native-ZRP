@@ -40,37 +40,42 @@ export default class Users extends Component {
     };
 
     render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <Text style={styles.title}>Users</Text>
-                    <Text style={styles.subtitle}>Search users</Text>
+      return (
+          <View style={styles.container}>
+              <View style={styles.formContainer}>
+                  <Text style={styles.title}>Users</Text>
+                  <Text style={styles.subtitle}>Search users</Text>
 
-                    <TextInput
-                        style={styles.input}
-                        keyboardType='email-address'
-                        placeholder='Filtrar email'
-                        onChangeText={this.userFilter}
-                        value={this.state.filterValue}
-                    />
-                </View>
+                  <TextInput
+                      style={styles.input}
+                      keyboardType='email-address'
+                      placeholder='Filtrar email'
+                      onChangeText={this.userFilter}
+                      value={this.state.filterValue}
+                  />
+              </View>
 
-                <FlatList
-                    data={this.state.filterUser}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <View style={styles.userItem}>
-                            <View style={styles.userInfo}>
-                                <Text style={styles.userEmail}>Email: {item.data.email}</Text>
-                                <Text style={styles.userUsername}>Username: {item.data.user}</Text>
-                            </View>
-                        </View>
-                    )}
-                    contentContainerStyle={styles.listContent}
-                />
-            </View>
-        );
-    }
+             
+              {this.state.filterUser.length === 0 ? (
+                  <Text style={styles.noResults}>El email no existe</Text>
+              ) : (
+                  <FlatList
+                      data={this.state.filterUser}
+                      keyExtractor={(item) => item.id}
+                      renderItem={({ item }) => (
+                          <View style={styles.userItem}>
+                              <View style={styles.userInfo}>
+                                  <Text style={styles.userEmail}>Email: {item.data.email}</Text>
+                                  <Text style={styles.userUsername}>Username: {item.data.user}</Text>
+                              </View>
+                          </View>
+                      )}
+                      contentContainerStyle={styles.listContent}
+                  />
+              )}
+          </View>
+      );
+  }
 }
 
 const styles = StyleSheet.create({
