@@ -15,7 +15,9 @@ export default class Home extends Component {
         this.setState({
             loading: true
         })
-        db.collection('posts').onSnapshot((docs) => {
+        db.collection('posts')
+        .orderBy("createdAt", "desc")
+        .onSnapshot((docs) => {
             let posts = [];
             docs.forEach((doc) => {
                 posts.push({
