@@ -81,6 +81,13 @@ export default class Register extends Component {
           <TouchableOpacity style={styles.buttonPrimary} onPress={() => this.onSubmit(this.state.email, this.state.password, this.state.bio, this.state.user)}>
             <Text style={styles.buttonText}>Registrarse</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.buttonSecondary} 
+            onPress={() => this.props.navigation.navigate('Login')}
+          >
+            <Text style={styles.buttonText}>¿Ya tienes cuenta? Iniciar sesión</Text>
+          </TouchableOpacity> 
           {this.state.errorMsg ? <Text style={styles.error}>{this.state.errorMsg}</Text> : null}
         </View>
       </View>
@@ -153,4 +160,13 @@ const styles = StyleSheet.create({
     color: '#ff1744',
     marginVertical: 10,
   },
+  buttonSecondary: {
+    backgroundColor: '#6a1b9a', 
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    borderRadius: 8,
+    width: '100%',
+    marginTop: 10,
+  }  
 });
