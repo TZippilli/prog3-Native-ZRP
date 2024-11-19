@@ -12,14 +12,6 @@ export default class Login extends Component {
     };
   }
 
-  componentDidMount(){
-    auth.onAuthStateChanged(user => {
-      if (user){
-        this.props.navigation.navigate("HomeMenu")
-      }
-    })
-  }
-
   onSubmit = () => {
     const { email, password } = this.state;
     auth.signInWithEmailAndPassword(email, password)
