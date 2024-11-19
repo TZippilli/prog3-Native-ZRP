@@ -15,6 +15,14 @@ export default class HomeMenu extends Component {
     super(props)
   }
 
+  componentDidMount(){
+    auth.onAuthStateChanged(user => {
+      if (!user){
+        this.props.navigation.navigate("Login")
+      }
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
