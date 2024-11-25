@@ -8,19 +8,19 @@ export default class Profile extends Component {
     super(props);
     this.state = {
       userPosts: [],
-      email: " ",
-      user: " ", //revisar por qué no se muestran los nombres
+      email: auth.currentUser.email,
+      user: " ",
     };
   }
 
   componentDidMount() {
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-      this.setState({
-        email: currentUser.email,
-        userName: currentUser.user,
-      });
-    }
+    db.collection('users')
+      .where('email', '==', auth.currentUser.email)
+      .onSnapshot(docs => {
+        docs.forEach(doc => {
+          this.setState({ user: doc.data().user })
+        })
+      })
 
     db.collection('posts')
       .where('email', '==', auth.currentUser.email)
