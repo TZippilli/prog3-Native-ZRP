@@ -3,8 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 import { auth, db } from '../firebase/config';
 
 export default class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
@@ -15,13 +15,7 @@ export default class Register extends Component {
     };
   }
 
-  componentDidMount() {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        this.props.navigation.navigate("HomeMenu")
-      }
-    })
-  }
+ 
 
 
   onSubmit(email, password, bio, user) {
@@ -35,7 +29,7 @@ export default class Register extends Component {
           })
             .then(() => {
               this.setState({ registered: true, errorMsg: '' });
-              this.props.navigation.navigate('Login');
+              this.props.navigation.navigate('HomeMenu');
             })
             .catch(e => console.log(e.message));
         }
